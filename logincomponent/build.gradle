@@ -1,0 +1,40 @@
+if (rootProject.loginRunAlone) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.android.compileSdkVersion
+
+
+
+    defaultConfig {
+        if (rootProject.loginRunAlone) {
+            applicationId "com.xcp.logincomponent"
+        }
+
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.dependencies.appcompat}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.dependencies.constraintlayout}"
+    implementation project(':componentbaselibrary')
+}
